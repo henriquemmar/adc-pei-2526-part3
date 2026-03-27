@@ -45,6 +45,7 @@ public class AuthResource {
     @POST
     @Path("/createaccount")
     @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response createAccount(RequestWrapper<CreateAccountData> request) {
 
         if(request == null || !request.isInputValid() || request.token != null ||

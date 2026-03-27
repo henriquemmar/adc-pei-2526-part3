@@ -8,7 +8,6 @@ import jakarta.ws.rs.core.Response;
 public class TokenValidator {
     private static final Datastore datastore = DatastoreOptions.getDefaultInstance().getService();
     private static final KeyFactory tokenKeyFactory = datastore.newKeyFactory().setKind("Token");
-    private static final KeyFactory userKeyFactory = datastore.newKeyFactory().setKind("User");
     private static final Gson g = new GsonBuilder().setPrettyPrinting().create();
     public TokenValidator(){}
 
