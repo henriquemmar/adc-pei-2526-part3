@@ -32,18 +32,18 @@ public class TokenValidator {
 
     public static Response validateToken(String tokenId) {
         if (tokenId == null || tokenId.isBlank()) {
-            return ErrorHandler.error(g, ErrorCode.FORBIDDEN);
+            return ErrorHandler.error(g, ErrorCode.INVALID_INPUT);
         }
         Entity token = getToken(tokenId);
 
         if (token == null) {
-            return ErrorHandler.error(g, ErrorCode.FORBIDDEN);
+            return ErrorHandler.error(g, ErrorCode.INVALID_TOKEN);
         }
         long expiresAt = token.getLong("expiresAt");
         long now = System.currentTimeMillis() / 1000;
 
         if (expiresAt < now) {
-            return ErrorHandler.error(g, ErrorCode.FORBIDDEN);
+            return ErrorHandler.error(g, ErrorCode.TOKEN_EXPIRED);
         }
 
         return null;

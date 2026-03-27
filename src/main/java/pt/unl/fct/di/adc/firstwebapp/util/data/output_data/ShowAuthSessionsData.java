@@ -4,9 +4,9 @@ public class ShowAuthSessionsData {
     public String tokenID;
     public String username;
     public String role;
-    public int expiresAt;
+    public long expiresAt;
 
-    public ShowAuthSessionsData(String tokenID, String username, String role, int expiresAt) {
+    public ShowAuthSessionsData(String tokenID, String username, String role, long expiresAt) {
         this.tokenID = tokenID;
         this.username = username;
         this.role = role;

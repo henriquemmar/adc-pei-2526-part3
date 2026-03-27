@@ -35,7 +35,7 @@ public class RestrictedResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response showUsers(RequestWrapper<EmptyInput> request) {
 
-        if (request == null || !request.isTokenValid()) {
+        if (request == null || !request.isInputValid() || !request.isTokenValid()) {
             return ErrorHandler.error(g, ErrorCode.INVALID_INPUT);
         }
 
@@ -76,7 +76,7 @@ public class RestrictedResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response deleteAccount(RequestWrapper<UsernameData> request) {
 
-        if (request == null || !request.input.isDataValid() || !request.isTokenValid()) {
+        if (request == null || !request.isInputValid() || !request.isTokenValid() || !request.input.isDataValid()) {
             return ErrorHandler.error(g, ErrorCode.INVALID_INPUT);
         }
         Transaction txn = datastore.newTransaction();
@@ -118,7 +118,7 @@ public class RestrictedResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response showAuthSessions(RequestWrapper<EmptyInput> request) {
-        if (request == null || !request.isTokenValid()) {
+        if (request == null || !request.isInputValid() || !request.isTokenValid()) {
             return ErrorHandler.error(g, ErrorCode.INVALID_INPUT);
         }
 
@@ -141,7 +141,7 @@ public class RestrictedResource {
 
                 String role = authSession.getString("role");
 
-                int expiresAt = (int) authSession.getLong("expiresAt");
+                long expiresAt = authSession.getLong("expiresAt");
 
                 authSessions.add(new ShowAuthSessionsData(tokenId, username, role, expiresAt));
             }
@@ -164,7 +164,7 @@ public class RestrictedResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response showUserRole(RequestWrapper<UsernameData> request){
 
-        if (request == null || request.input == null || !request.input.isDataValid() || !request.isTokenValid()) {
+        if (request == null || !request.isInputValid() || !request.input.isDataValid() || !request.isTokenValid()) {
 
             return ErrorHandler.error(g, ErrorCode.INVALID_INPUT);
 
@@ -200,7 +200,7 @@ public class RestrictedResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response changeUserRole(RequestWrapper<ChangeRoleData> request) {
 
-        if (request == null || !request.isTokenValid() ||
+        if (request == null || !request.isTokenValid() || !request.isInputValid() ||
                 !request.input.isDataValid()) {
             return ErrorHandler.error(g, ErrorCode.INVALID_INPUT);
         }
