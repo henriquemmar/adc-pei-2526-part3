@@ -27,21 +27,17 @@ import pt.unl.fct.di.adc.firstwebapp.util.data.input_data.UsernameData;
 
 @Path("/")
 public class AuthResource {
-    private static final String MESSAGE_INVALID_CREDENTIALS = "Incorrect username or password.";
-    private static final String MESSAGE_NEXT_PARAMETER_INVALID = "Request parameter 'next' must be greater or equal to 0.";
-
-
+    private static final String MESSAGE_SUCCESS_LOGOUT = "Logout successful";
     private static final String LOG_MESSAGE_LOGIN_ATTEMPT = "Login attempt by user: ";
     private static final String LOG_MESSAGE_LOGIN_SUCCESSFUL = "Login successful by user: ";
     private static final String LOG_MESSAGE_WRONG_PASSWORD = "Wrong password for: ";
-    private static final String LOG_MESSAGE_UNKNOW_USER = "Failed login attempt for username: ";
 
-    private static final String USER_PWD = "user_pwd";
-    private static final String USER_LOGIN_TIME = "user_login_time";
     private static final Logger LOG = Logger.getLogger(AuthResource.class.getName());
     private static final Datastore datastore = DatastoreOptions.getDefaultInstance().getService();
     private static final KeyFactory userKeyFactory = datastore.newKeyFactory().setKind("User");
+
     private final Gson g = new GsonBuilder().setPrettyPrinting().create();
+
     @POST
     @Path("/createaccount")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -172,7 +168,7 @@ public class AuthResource {
 
             LOG.info("Logout executed for user: " + request.input.username);
 
-            ResponseWrapper<MessageData> response = new ResponseWrapper<>(new MessageData("Logout successful"));
+            ResponseWrapper<MessageData> response = new ResponseWrapper<>(new MessageData(MESSAGE_SUCCESS_LOGOUT));
 
             return Response.ok(g.toJson(response)).build();
 

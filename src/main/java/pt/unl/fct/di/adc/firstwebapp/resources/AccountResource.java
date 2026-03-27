@@ -21,6 +21,8 @@ import pt.unl.fct.di.adc.firstwebapp.util.data.input_data.ModifyAccountData;
 
 @Path("/")
 public class AccountResource {
+    private static final String MESSAGE_SUCCESS_PASSWORD_CHANGE = "Password changed successfully";
+    private static final String MESSAGE_SUCCESS_UPDATE = "Updated successfully";
     private static final Logger LOG = Logger.getLogger(AccountResource.class.getName());
     private static final Datastore datastore = DatastoreOptions.getDefaultInstance().getService();
     private static final KeyFactory userKeyFactory = datastore.newKeyFactory().setKind("User");
@@ -81,7 +83,7 @@ public class AccountResource {
 
             LOG.info("Account modified: " + request.input.username + " by " + requesterUsername);
 
-            ResponseWrapper<MessageData> response = new ResponseWrapper<>(new MessageData("Updated successfully"));
+            ResponseWrapper<MessageData> response = new ResponseWrapper<>(new MessageData(MESSAGE_SUCCESS_UPDATE));
 
             return Response.ok(g.toJson(response)).build();
 
@@ -142,7 +144,7 @@ public class AccountResource {
             txn.update(updatedUser);
             txn.commit();
 
-            ResponseWrapper<MessageData> response = new ResponseWrapper<>(new MessageData("Password changed successfully"));
+            ResponseWrapper<MessageData> response = new ResponseWrapper<>(new MessageData(MESSAGE_SUCCESS_PASSWORD_CHANGE));
 
             return Response.ok(g.toJson(response)).build();
 
