@@ -1,4 +1,4 @@
-package pt.unl.fct.di.adc.firstwebapp.util;
+package pt.unl.fct.di.adc.firstwebapp.util.data.input_data;
 
 public class LoginData {
 	
@@ -10,6 +10,10 @@ public class LoginData {
 	public LoginData(String username, String password) {
 		this.username = username;
 		this.password = password;
+	}
+	public boolean isDataValid(){
+		return username != null && !username.isBlank() &&
+				password != null && !password.isBlank();
 	}
 	
 }
