@@ -19,7 +19,7 @@ public class AuthToken {
 		this.tokenId = UUID.randomUUID().toString();
 		this.role = role;
 		this.issuedAt =  System.currentTimeMillis() / 1000;
-		this.expiresAt = issuedAt + 3600; // 1 hora
+		this.expiresAt = issuedAt + 900; // 15 mins
 	}
 	
 }
