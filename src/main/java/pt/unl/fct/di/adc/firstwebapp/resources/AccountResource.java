@@ -39,10 +39,10 @@ public class AccountResource {
             return ErrorHandler.error(g, ErrorCode.INVALID_INPUT);
         }
 
-        Response error = TokenValidator.validateToken(request.token);
+        Response error = TokenValidator.validateToken(request.token.tokenId);
         if (error != null) return error;
 
-        Entity token = TokenValidator.getToken(request.token);
+        Entity token = TokenValidator.getToken(request.token.tokenId);
 
         String requesterUsername = token.getString("username");
 
@@ -108,10 +108,10 @@ public class AccountResource {
         }
         Transaction txn = datastore.newTransaction();
         try {
-            Response error = TokenValidator.validateToken(request.token);
+            Response error = TokenValidator.validateToken(request.token.tokenId);
             if (error != null) return error;
 
-            Entity token = TokenValidator.getToken(request.token);
+            Entity token = TokenValidator.getToken(request.token.tokenId);
             String tokenUsername = token.getString("username");
 
             if (!tokenUsername.equals(request.input.username)) {

@@ -40,7 +40,7 @@ public class RestrictedResource {
         }
 
         try {
-            Response error = TokenValidator.validateTokenAndCheckRoles(request.token, UserRole.ADMIN, UserRole.BOFFICER);
+            Response error = TokenValidator.validateTokenAndCheckRoles(request.token.tokenId, UserRole.ADMIN, UserRole.BOFFICER);
             if (error != null) return error;
 
             Query<Entity> query = Query.newEntityQueryBuilder()
@@ -81,7 +81,7 @@ public class RestrictedResource {
         }
         Transaction txn = datastore.newTransaction();
         try{
-            Response error = TokenValidator.validateTokenAndCheckRoles(request.token, UserRole.ADMIN);
+            Response error = TokenValidator.validateTokenAndCheckRoles(request.token.tokenId, UserRole.ADMIN);
             if (error != null) return error;
 
             Key userKey = userKeyFactory.newKey(request.input.username);
@@ -123,7 +123,7 @@ public class RestrictedResource {
         }
 
         try {
-            Response error = TokenValidator.validateTokenAndCheckRoles(request.token, UserRole.ADMIN, UserRole.BOFFICER);
+            Response error = TokenValidator.validateTokenAndCheckRoles(request.token.tokenId, UserRole.ADMIN, UserRole.BOFFICER);
             if (error != null) return error;
 
             Query<Entity> query = Query.newEntityQueryBuilder()
@@ -170,7 +170,7 @@ public class RestrictedResource {
 
         }
         try{
-            Response error = TokenValidator.validateTokenAndCheckRoles(request.token, UserRole.ADMIN, UserRole.BOFFICER);
+            Response error = TokenValidator.validateTokenAndCheckRoles(request.token.tokenId, UserRole.ADMIN, UserRole.BOFFICER);
             if (error != null) return error;
 
             Key userKey = userKeyFactory.newKey(request.input.username);
@@ -208,7 +208,7 @@ public class RestrictedResource {
         Transaction txn = datastore.newTransaction();
 
         try {
-            Response error = TokenValidator.validateTokenAndCheckRoles(request.token, UserRole.ADMIN);
+            Response error = TokenValidator.validateTokenAndCheckRoles(request.token.tokenId, UserRole.ADMIN);
             if (error != null) return error;
 
             Key userKey = userKeyFactory.newKey(request.input.username);

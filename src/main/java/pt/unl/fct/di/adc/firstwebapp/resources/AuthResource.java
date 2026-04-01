@@ -150,10 +150,10 @@ public class AuthResource {
         }
         Transaction txn = datastore.newTransaction();
         try {
-            Response error = TokenValidator.validateToken(request.token);
+            Response error = TokenValidator.validateToken(request.token.tokenId);
             if (error != null) return error;
 
-            Entity requesterToken = TokenValidator.getToken(request.token);
+            Entity requesterToken = TokenValidator.getToken(request.token.tokenId);
             String requesterUsername = requesterToken.getString("username");
 
             String requesterRole = requesterToken.getString("role");
